@@ -1,0 +1,11 @@
+{
+  "expo": {
+    "name": "relax-app",
+    "slug": "relax-app",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  },
+  "name": "relax-app"
+}
