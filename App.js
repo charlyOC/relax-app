@@ -2,7 +2,6 @@
 import React from 'react';
 import { StatusBar, View, Image, Button, StyleSheet, Text} from 'react-native';
 import Intro from './components/Intro';
-import Welcome from './components/Welcome';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 

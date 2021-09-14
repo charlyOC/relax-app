@@ -1,5 +1,7 @@
 import React from "react";
-import {View, StyleSheet, Text, Image} from 'react-native';
+import {View, StyleSheet, Text, Image, Animated} from 'react-native';
+
+
 import BubbleTwo from '../images/graph.png';
 import BubbleThree from '../images/graph_2.png';
 import BubbleFour from '../images/graph_3.png';
@@ -8,76 +10,127 @@ import BubbleSix from '../images/graph_6.png';
 import BubbleSeven from '../images/graph_7.png';
 
 
-export default function Welcome() {
 
-    return(
-        <View style={style.container}>
-           <Text style={style.intro}>This 40 seconds sophrology experience will help you to release stress only with your breath</Text>
-           <View style={style.bubbles}>
-                <Image source={BubbleTwo} resizeMode="cover" style={style.bubbleTwo} />
-                <Image source={BubbleThree} resizeMode="cover" style={style.bubbleThree} />
-                <Image source={BubbleFour} resizeMode="cover" style={style.bubbleFour} />
-                <Image source={BubbleFive} resizeMode="cover" style={style.bubbleFive} />
-                <Image source={BubbleSix} resizeMode="cover" style={style.bubbleSix} />
-                <Image source={BubbleSeven} resizeMode="cover" style={style.BubbleSeven} />
-           </View>
+export default class Intro extends React.Component {
 
-        </View>
-    );
+    constructor(props) {
+        super(props)
+        this.state = {
+            topPosition: new Animated.Value(0)
+        }
+    }
+
+    componentDidMount(){
+        Animated.loop(
+            Animated.sequence([
+                Animated.timing(
+                    this.state.topPosition, 
+                    {
+                        toValue: 20,
+                        duration: 2000,
+                        useNativeDriver: false
+                    }
+                ), 
+    
+                Animated.timing(
+                    this.state.topPosition,
+                    {
+                        toValue: 0,
+                        duration: 2000, 
+                        useNativeDriver: false
+    
+                    }
+                )
+            ])
+        ).start()   
+    }
+
+        render() {
+            return(
+                <View style={style.container}>
+                    <Text style={style.intro}>This 40 seconds sophrology experience will help you to release stress only with your breath</Text>
+                    <Text></Text>
+                    <Animated.View style={[style.bubbles, {bottom: this.state.topPosition}]}>
+                        <Image source={BubbleTwo} resizeMode="cover" style={style.bubbleTwo} />
+                        <Image source={BubbleThree} resizeMode="cover" style={style.bubbleThree} />
+                        <Image source={BubbleFour} resizeMode="cover" style={style.bubbleFour} />
+                        <Image source={BubbleFive} resizeMode="cover" style={style.bubbleFive} />
+                        <Image source={BubbleSix} resizeMode="cover" style={style.bubbleSix} />
+                        <Image source={BubbleSeven} resizeMode="cover" style={style.BubbleSeven} />
+                   </Animated.View>
+                </View>
+    
+            );
+    
+        }
+
 }
-  
+
+
+
 
 const style = StyleSheet.create({
 
     container: {
-        height: "100%",
-        backgroundColor: "#099ae4",
+        flex: 1, 
+        justifyContent: "center",
+        alignItems: "center"
     },
 
     intro: {
-        color:"whitesmoke",
+        color:"#0366CB",
         fontFamily: 'ArialRoundedMTBold',
         textAlign: "center",
         lineHeight: 47,
         fontSize: 25,
         margin: 20,
-        marginTop: 50, 
+        marginTop: 50,
     },
 
-    bubbleOne: {
-        width: 40, 
-        height:40,
-        position: "absolute",
-        left: '40%',
-    },
 
     bubbleTwo: {
         width: 40,
-        height: 40
+        height: 40,
+        left: '40%',
+        bottom: '110%'
     },
 
     bubbleThree: {
         width: 40,
-        height: 40
+        height: 40,
+        left: '-30%',
+        bottom: '95%'
     },
 
     bubbleFour: {
         width: 40,
-        height: 40   
+        height: 40,
+        left: '10%',
+        bottom: '90%',
     },
 
     bubbleFive: {
         width: 40,
-        height: 40   
+        height: 40,
+        left: '-40%',
+        bottom: '70%',
+
     },
 
     bubbleSix: {
         width: 40,
-        height: 40   
+        height: 40,
+        left: '30%',
+        bottom: '90%',
+
+
     },
 
     BubbleSeven: {
         width: 40,
-        height: 40   
+        height: 40,
+        bottom: '50%'
     },
+
+
 })
