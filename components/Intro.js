@@ -1,5 +1,6 @@
 import React from "react";
-import {View, StyleSheet, Text, Image, Animated} from 'react-native';
+import {View, StyleSheet, Text, Image, Animated, Button} from 'react-native';
+
 
 
 import BubbleTwo from '../images/graph.png';
@@ -8,6 +9,7 @@ import BubbleFour from '../images/graph_3.png';
 import BubbleFive from '../images/graph_5.png';
 import BubbleSix from '../images/graph_6.png';
 import BubbleSeven from '../images/graph_7.png';
+
 
 
 
@@ -48,8 +50,7 @@ export default class Intro extends React.Component {
         render() {
             return(
                 <View style={style.container}>
-                    <Text style={style.intro}>This 40 seconds sophrology experience will help you to release stress only with your breath</Text>
-                    <Text></Text>
+                    <Text style={style.intro}>This 40 seconds sophrology experience will help you to relax</Text>
                     <Animated.View style={[style.bubbles, {bottom: this.state.topPosition}]}>
                         <Image source={BubbleTwo} resizeMode="cover" style={style.bubbleTwo} />
                         <Image source={BubbleThree} resizeMode="cover" style={style.bubbleThree} />
@@ -58,6 +59,9 @@ export default class Intro extends React.Component {
                         <Image source={BubbleSix} resizeMode="cover" style={style.bubbleSix} />
                         <Image source={BubbleSeven} resizeMode="cover" style={style.BubbleSeven} />
                    </Animated.View>
+                   <Button title="Next"
+                    onPress={() => this.props.navigation.navigate('Main')} />
+
                 </View>
     
             );
@@ -68,68 +72,73 @@ export default class Intro extends React.Component {
 
 
 
-
 const style = StyleSheet.create({
 
     container: {
-        flex: 1, 
-        justifyContent: "center",
-        alignItems: "center"
+        flex: 1,
+        flexDirection: 'column',
+        justifyContent: 'space-around',
+        alignItems: 'center',
+        backgroundColor: "#fbedeb",
     },
 
     intro: {
         color:"#0366CB",
         fontFamily: 'ArialRoundedMTBold',
         textAlign: "center",
-        lineHeight: 47,
+        marginTop: '30%',
+        lineHeight: 57,
         fontSize: 25,
-        margin: 20,
-        marginTop: 50,
     },
 
+
+    bubbles: {
+        height: '40%',
+        width: '100%',
+        marginTop: '-70%'     
+    }, 
 
     bubbleTwo: {
         width: 40,
         height: 40,
-        left: '40%',
-        bottom: '110%'
+        bottom: '60%',
+        left: '40%'
     },
 
     bubbleThree: {
         width: 40,
         height: 40,
-        left: '-30%',
-        bottom: '95%'
+        bottom: '55%',
+        left: '5%'
     },
 
     bubbleFour: {
         width: 40,
         height: 40,
-        left: '10%',
-        bottom: '90%',
+        bottom: '30%',
+        left: '80%'
     },
 
     bubbleFive: {
         width: 40,
         height: 40,
-        left: '-40%',
-        bottom: '70%',
+        bottom: '10%',
+        left: '40%'
 
     },
 
     bubbleSix: {
         width: 40,
         height: 40,
-        left: '30%',
-        bottom: '90%',
-
-
+        left: '70%',
+        bottom: '-20%'
     },
 
     BubbleSeven: {
         width: 40,
         height: 40,
-        bottom: '50%'
+        bottom: '-30%',
+        left: '10%'
     },
 
 
