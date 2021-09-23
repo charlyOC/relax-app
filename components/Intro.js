@@ -12,17 +12,29 @@ import BubbleSeven from '../images/graph_7.png';
 
 
 
-
-export default class Intro extends React.Component {
+export default class Intro extends React.Component
+{
 
     constructor(props) {
         super(props)
         this.state = {
-            topPosition: new Animated.Value(0)
+            topPosition: new Animated.Value(0),
+            entering: new Animated.Value(0)
         }
     }
 
+
     componentDidMount(){
+        
+        Animated.timing(
+            this.state.entering,
+            {
+                toValue: 1,
+                duration: 1000,
+                useNativeDriver: false
+            }
+        ).start()       
+        
         Animated.loop(
             Animated.sequence([
                 Animated.timing(
@@ -33,23 +45,25 @@ export default class Intro extends React.Component {
                         useNativeDriver: false
                     }
                 ), 
-    
+        
                 Animated.timing(
                     this.state.topPosition,
                     {
                         toValue: 0,
                         duration: 2000, 
                         useNativeDriver: false
-    
+        
                     }
                 )
             ])
-        ).start()   
+        ).start() 
+        
+
     }
 
         render() {
             return(
-                <View style={style.container}>
+                <Animated.View style={[style.container, {opacity: this.state.entering}]}>
                     <Text style={style.intro}>This 40 seconds sophrology experience will help you to relax</Text>
                     <Animated.View style={[style.bubbles, {bottom: this.state.topPosition}]}>
                         <Image source={BubbleTwo} resizeMode="cover" style={style.bubbleTwo} />
@@ -62,7 +76,7 @@ export default class Intro extends React.Component {
                    <Button title="Next"
                     onPress={() => this.props.navigation.navigate('Main')} />
 
-                </View>
+                </Animated.View>
     
             );
     
