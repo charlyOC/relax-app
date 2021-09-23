@@ -15,12 +15,17 @@ import BubbleSeven from '../images/graph_7.png';
 export default class Intro extends React.Component
 {
 
+
+    
     constructor(props) {
         super(props)
         this.state = {
             topPosition: new Animated.Value(0),
-            entering: new Animated.Value(0)
+            entering: new Animated.Value(0),
+            introText: "This 40 seconds sophrology experience will help you to reduce stress using the 'square breathing' technique"
         }
+
+
     }
 
 
@@ -33,7 +38,9 @@ export default class Intro extends React.Component
                 duration: 1000,
                 useNativeDriver: false
             }
-        ).start()       
+        ).start()    
+        
+        
         
         Animated.loop(
             Animated.sequence([
@@ -61,10 +68,17 @@ export default class Intro extends React.Component
 
     }
 
+
+    changeText = () => {
+        this.setState({
+            introText: "You're just going to inhale, hold and exhale with a precise timeframe. Don't worry a whale will help you. :)"
+        })
+    }
+
         render() {
             return(
                 <Animated.View style={[style.container, {opacity: this.state.entering}]}>
-                    <Text style={style.intro}>This 40 seconds sophrology experience will help you to relax</Text>
+                    <Text style={style.intro}>{this.state.introText}</Text>
                     <Animated.View style={[style.bubbles, {bottom: this.state.topPosition}]}>
                         <Image source={BubbleTwo} resizeMode="cover" style={style.bubbleTwo} />
                         <Image source={BubbleThree} resizeMode="cover" style={style.bubbleThree} />
@@ -74,7 +88,7 @@ export default class Intro extends React.Component
                         <Image source={BubbleSeven} resizeMode="cover" style={style.BubbleSeven} />
                    </Animated.View>
                    <Button title="Next"
-                    onPress={() => this.props.navigation.navigate('Main')} />
+                    onPress={this.changeText} />
 
                 </Animated.View>
     
@@ -100,16 +114,16 @@ const style = StyleSheet.create({
         color:"#0366CB",
         fontFamily: 'ArialRoundedMTBold',
         textAlign: "center",
-        marginTop: '30%',
         lineHeight: 57,
         fontSize: 25,
+        margin: 10, 
     },
 
 
     bubbles: {
         height: '40%',
-        width: '100%',
-        marginTop: '-70%'     
+        width: '100%', 
+        marginTop: '-80%'
     }, 
 
     bubbleTwo: {
